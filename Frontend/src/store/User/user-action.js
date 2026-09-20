@@ -20,7 +20,7 @@ export const getLogin=(user) => async(dispatch) => {
   try{
     dispatch(userActions.getLoginRequest());
     const {data} = await axiosInstance.post("/v1/rent/user/login", user);
-    dispatch(userActions.getSignupDetails(data.user))
+    dispatch(userActions.getLoginDetails(data.user))
   }catch(error){
     dispatch(userActions.getError(error.response.data.message))
   }
@@ -30,7 +30,7 @@ export const getLogin=(user) => async(dispatch) => {
 export const currentUser =() => async(dispatch) =>{
   try{
     dispatch(userActions.getCurrentRequest());
-    const {data} = await axiosInstance.get("/v1/rent/user/me", currentUser);
+    const {data} = await axiosInstance.get("/v1/rent/user/me");
     dispatch(userActions.getCurrentUser(data.user))
   }catch(error){
     dispatch(userActions.getLogout(null));
